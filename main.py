@@ -54,3 +54,5 @@ while True:
     except Exception as e:
         print(f"An unexpected error ocurred {e}.")
     
+for category, percentage in budget_categories.items():
+    print(f"{category.title()}: Percentage in dollars: ${percentage * valid_deposit:,.2f}")
