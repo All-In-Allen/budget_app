@@ -8,7 +8,7 @@
 # 5. Handle any fractional rounding errors so the total matches down to the penny.
 # 6. Print a clean, readable text summary of the results to the terminal window.
 # ==============================================================================
-budget_categories = {
+categories_percentages = {
     "savings" : 0.20,
     "mortgage/rent" : 0.30,
     "groceries" : 0.15,
@@ -20,7 +20,7 @@ budget_categories = {
     "unallocated" : 0.0,
     }
 
-total_percentage = sum(budget_categories.values())
+total_percentage = sum(categories_percentages.values())
 
 if total_percentage > 1.0:
     print(f"Total percentage is {total_percentage * 100}% this is greater than 100%. Please adjust.")
@@ -45,7 +45,7 @@ while True:
             print("Deposit amount cannot $0 or less. Please enter and valid amount.")
             continue
         
-        print(f"Success! The amount you enter is {valid_deposit}.")
+        print(f"Success! The amount you enter is ${valid_deposit:,.2f}")
         break
 
     except ValueError:
@@ -53,6 +53,28 @@ while True:
 
     except Exception as e:
         print(f"An unexpected error ocurred {e}.")
+
+accumilator = 0.0
+
+category_amounts = {
+    "savings" : 0.00,
+    "mortgage/rent" : 0.00,
+    "groceries" : 0.00,
+    "vehicle loan(s)" :0.00,
+    "vehicle insurance" : 0.00,
+    "health insurance" : 0.00,
+    "clothes" : 0.00,
+    "entertainment" : 0.00,
+    "unallocated" : 0.00,
+    }
     
-for category, percentage in budget_categories.items():
-    print(f"{category.title()}: Percentage in dollars: ${percentage * valid_deposit:,.2f}")
+for category, percentage in categories_percentages.items():
+    rounded_split = round(percentage * valid_deposit, 2)
+    accumilator += rounded_split
+    category_amounts[category] = rounded_split
+
+adjustment = valid_deposit - accumilator
+
+adjustment = round(adjustment , 2)
+
+
