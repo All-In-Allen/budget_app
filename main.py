@@ -72,9 +72,27 @@ for category, percentage in categories_percentages.items():
     rounded_split = round(percentage * valid_deposit, 2)
     accumilator += rounded_split
     category_amounts[category] = rounded_split
+    print(f"{category}: {rounded_split}")
 
 adjustment = valid_deposit - accumilator
 
 adjustment = round(adjustment , 2)
 
+if adjustment == 0.00:
+    pass
+
+elif adjustment < 0.00:
+    print(f"Adjusted amount of {adjustment}, has been applied to:")
+
+elif adjustment > 0.00:
+    category_amounts["unallocated"] += adjustment
+    print(f"Unallocated: {category_amounts["unallocated"]:,.2f}")
+
+elif category_amounts["unallocated"] > 0.00 and adjustment < 0.00:
+    category_amounts["unallocated"] += adjustment
+    print(f"Unallocated: {category_amounts["unallocated"]:,.2f}")
+
+else:
+    category_amounts["savings"] += adjustment
+    print(f"Savings: {category_amounts["savings"]:,.2f}")
 
