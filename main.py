@@ -96,3 +96,5 @@ else:
     category_amounts["savings"] += adjustment
     print(f"Savings: {category_amounts["savings"]:,.2f}")
 
+for category, amount in category_amounts.items():
+    print(f"{category.title():<20} {amount:,.2f}")
