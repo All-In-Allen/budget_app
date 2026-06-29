@@ -81,20 +81,18 @@ adjustment = round(adjustment , 2)
 if adjustment == 0.00:
     pass
 
-elif adjustment < 0.00:
-    print(f"Adjusted amount of {adjustment}, has been applied to:")
-
 elif adjustment > 0.00:
     category_amounts["unallocated"] += adjustment
     print(f"Unallocated: {category_amounts["unallocated"]:,.2f}")
 
-elif category_amounts["unallocated"] > 0.00 and adjustment < 0.00:
+elif adjustment < 0.00 and category_amounts["unallocated"] > 0.00:
     category_amounts["unallocated"] += adjustment
     print(f"Unallocated: {category_amounts["unallocated"]:,.2f}")
 
 else:
     category_amounts["savings"] += adjustment
     print(f"Savings: {category_amounts["savings"]:,.2f}")
+
 
 for category, amount in category_amounts.items():
     print(f"{category.title():<20} {amount:,.2f}")
