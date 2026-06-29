@@ -34,25 +34,28 @@ else:
 prompt = "Please enter a deposit amount."
 prompt += "Example: 1000 0r 1000.25. "
 
-while True:
-    deposit_amount = input(prompt)
+#Deposit validation loop takes input(prompt) and returns valid_deposit
+def fetch_deposit_amount(prompt):
+    while True:
+        deposit_amount = input(prompt)
 
-    try:
-        clean_deposit = (deposit_amount).replace("$","").replace(",","")
+        try:
+            clean_deposit = (deposit_amount).replace("$","").replace(",","")
         
-        valid_deposit = float(clean_deposit)
-        if valid_deposit <= 0:
-            print("Deposit amount cannot $0 or less. Please enter and valid amount.")
-            continue
-        
-        print(f"Success! The amount you enter is ${valid_deposit:,.2f}")
-        break
+            valid_deposit = float(clean_deposit)
+            if valid_deposit <= 0:
+                print("Deposit amount cannot $0 or less. Please enter and valid amount.")
+                continue
+            print(f"Success! The amount you enter is ${valid_deposit:,.2f}")
+            return valid_deposit
 
-    except ValueError:
-        print("Please enter a valid number")
+        except ValueError:
+            print("Please enter a valid number")
 
-    except Exception as e:
-        print(f"An unexpected error ocurred {e}.")
+        except Exception as e:
+            print(f"An unexpected error ocurred {e}.")
+
+valid_deposit = fetch_deposit_amount(prompt)
 
 accumilator = 0.0
 
