@@ -20,16 +20,18 @@ categories_percentages = {
     "unallocated" : 0.0,
     }
 
-total_percentage = sum(categories_percentages.values())
+def validate_and_adjust_percentages(categories_percentages):
+    total_percentage = sum(categories_percentages.values())
 
-if total_percentage > 1.0:
-    print(f"Total percentage is {total_percentage * 100}% this is greater than 100%. Please adjust.")
-    exit()
-elif total_percentage < 1.0:
-    print(f"Total percentage is {total_percentage * 100}% Do you want the remaining funds to go to Unallocated")
-    exit()
-else:
-    print("Safety check passed: Budget allocation equals 100%")
+    if total_percentage > 1.0:
+        print(f"Total percentage is {total_percentage * 100}% this is greater than 100%. Please adjust.")
+        return False
+    elif total_percentage < 1.0:
+        print(f"Total percentage is {total_percentage * 100}% Remaining percentage {(1.0 - total_percentage) * 100} will be added to Unallocated")
+
+        
+    else:
+        print("Safety check passed: Budget allocation equals 100%")
 
 prompt = "Please enter a deposit amount."
 prompt += "Example: 1000 0r 1000.25. "
